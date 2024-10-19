@@ -8,11 +8,11 @@ public class FilmeTest {
 
     @Test
     public void testCompareTo() {
-        Filme f1 = new Filme("A", 5, 2020);
-        Filme f2 = new Filme("B", 4, 2021);
-        Filme f3 = new Filme("C", 5, 2019);
-        Filme f4 = new Filme("D", 5, 2020);
-        Filme f5 = new Filme("A", 5, 2020);
+        Filme f1 = new Filme(1, "A", 5, 2020);
+        Filme f2 = new Filme(2, "B", 4, 2021);
+        Filme f3 = new Filme(3, "C", 5, 2019);
+        Filme f4 = new Filme(4, "D", 5, 2020);
+        Filme f5 = new Filme(5, "A", 5, 2020);
 
         assertTrue(f1.compareTo(f2) < 0); // f1 deve vir antes de f2 devido à nota maior
         assertTrue(f2.compareTo(f1) > 0); // f2 deve vir depois de f1 devido à nota menor
@@ -22,5 +22,7 @@ public class FilmeTest {
 
         assertTrue(f1.compareTo(f4) < 0); // f1 deve vir antes de f4 devido ao nome em ordem alfabética
         assertTrue(f4.compareTo(f1) > 0); // f4 deve vir depois de f1 devido ao nome em ordem alfabética
+
+        assertTrue(f1.compareTo(f5) == 0); // f1 deve ser igual a f5
     }
 }
