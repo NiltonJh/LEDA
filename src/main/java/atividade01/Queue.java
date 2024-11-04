@@ -1,25 +1,20 @@
 package atividade01;
 
-import java.util.LinkedList;
-
 public class Queue {
-    private LinkedList<Filme> stack1 = new LinkedList<>();
-    private LinkedList<Filme> stack2 = new LinkedList<>();
+    private DoublyLinkedList<Filme> stack1 = new DoublyLinkedList<>();
+    private DoublyLinkedList<Filme> stack2 = new DoublyLinkedList<>();
 
     public void enqueue(Filme filme) {
-        stack1.push(filme);
+        stack1.add(filme);
     }
 
     public Filme dequeue() {
         if (stack2.isEmpty()) {
             while (!stack1.isEmpty()) {
-                stack2.push(stack1.pop());
+                stack2.add(stack1.removeLast());
             }
         }
-        if (!stack2.isEmpty()) {
-            return stack2.pop();
-        }
-        return null; // Retorna null se a fila estiver vazia
+        return stack2.removeFirst();
     }
 
     public boolean isEmpty() {
@@ -27,15 +22,15 @@ public class Queue {
     }
 
     public String display() {
-        LinkedList<Filme> tempStack = new LinkedList<>();
+        DoublyLinkedList<Filme> tempStack = new DoublyLinkedList<>();
         StringBuilder result = new StringBuilder();
         while (!isEmpty()) {
             Filme filme = dequeue();
             result.append(filme).append("\n");
-            tempStack.push(filme);
+            tempStack.add(filme);
         }
         while (!tempStack.isEmpty()) {
-            enqueue(tempStack.pop());
+            enqueue(tempStack.removeFirst());
         }
         return result.toString();
     }

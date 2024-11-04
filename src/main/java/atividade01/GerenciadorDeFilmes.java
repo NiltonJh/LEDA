@@ -96,47 +96,45 @@ public class GerenciadorDeFilmes {
             String estrutura = scanner.nextLine();
             gerenciador.setEstrutura(estrutura);
 
-            System.out.println("1. Inserir Filme");
-            System.out.println("2. Buscar Filme");
-            System.out.println("3. Remover Filme");
-            System.out.println("4. Exibir Filmes Ordenados");
-            System.out.println("5. Sair");
+            System.out.println("Escolha uma operação (inserir, buscar, remover, exibir, sair): ");
+            String operacao = scanner.nextLine();
 
-            int opcao = scanner.nextInt();
-            scanner.nextLine(); // Consumir nova linha
+            if (operacao.equals("sair")) {
+                break;
+            }
 
-            switch (opcao) {
-                case 1:
-                    System.out.println("Digite o ID, Nome, Nota e Ano do Filme: ");
+            switch (operacao) {
+                case "inserir":
+                    System.out.println("Digite o id, nome, nota e ano do filme: ");
                     int id = scanner.nextInt();
-                    scanner.nextLine(); // Consumir nova linha
-                    String nome = scanner.nextLine();
+                    String nome = scanner.next();
                     int nota = scanner.nextInt();
                     int ano = scanner.nextInt();
-                    scanner.nextLine(); // Consumir nova linha
+                    scanner.nextLine(); // Consumir a nova linha
                     Filme filme = new Filme(id, nome, nota, ano);
                     gerenciador.inserirFilme(filme);
                     break;
-                case 2:
-                    System.out.println("Digite o ID do Filme: ");
+                case "buscar":
+                    System.out.println("Digite o id do filme: ");
                     id = scanner.nextInt();
-                    scanner.nextLine(); // Consumir nova linha
+                    scanner.nextLine(); // Consumir a nova linha
                     Filme encontrado = gerenciador.buscarFilme(id);
                     System.out.println(encontrado != null ? encontrado : "Filme não encontrado");
                     break;
-                case 3:
-                    System.out.println("Digite o ID do Filme: ");
+                case "remover":
+                    System.out.println("Digite o id do filme: ");
                     id = scanner.nextInt();
-                    scanner.nextLine(); // Consumir nova linha
+                    scanner.nextLine(); // Consumir a nova linha
                     gerenciador.removerFilme(id);
                     break;
-                case 4:
+                case "exibir":
                     System.out.println(gerenciador.exibirFilmesOrdenados());
                     break;
-                case 5:
-                    scanner.close();
-                    return;
+                default:
+                    System.out.println("Operação inválida");
+                    break;
             }
         }
+        scanner.close();
     }
 }

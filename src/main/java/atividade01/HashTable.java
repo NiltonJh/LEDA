@@ -1,17 +1,15 @@
 package atividade01;
 
-import java.util.LinkedList;
-
 public class HashTable {
-    private LinkedList<Filme>[] table;
+    private DoublyLinkedList<Filme>[] table;
     private int size;
 
     @SuppressWarnings("unchecked")
     public HashTable(int size) {
         this.size = size;
-        table = new LinkedList[size];
+        table = new DoublyLinkedList[size];
         for (int i = 0; i < size; i++) {
-            table[i] = new LinkedList<>();
+            table[i] = new DoublyLinkedList<>();
         }
     }
 
@@ -26,25 +24,18 @@ public class HashTable {
 
     public Filme search(int id) {
         int index = hash(id);
-        for (Filme filme : table[index]) {
-            if (filme.getId() == id) {
-                return filme;
-            }
-        }
-        return null;
+        return table[index].find(new Filme(id, null, 0, 0));
     }
 
     public void delete(int id) {
         int index = hash(id);
-        table[index].removeIf(filme -> filme.getId() == id);
+        table[index].remove(new Filme(id, null, 0, 0));
     }
 
     public String display() {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < size; i++) {
-            for (Filme filme : table[i]) {
-                result.append(filme).append("\n");
-            }
+            result.append(table[i].display());
         }
         return result.toString();
     }
